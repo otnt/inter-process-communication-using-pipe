@@ -22,7 +22,8 @@ void run(char **program)
 
 int main(int argc, char **argv)
 {
-	if (argc != 3) {
+	if (argc != 3)
+	{
 		fprintf(stderr, "Usage: %s <first program> <second program>\n", argv[0]);
 		exit(0);
 	}
@@ -44,7 +45,8 @@ int main(int argc, char **argv)
 	program2[0] = argv[2];
 
 	// Create pipe for inter-process communication.
-	if (-1 == pipe(pipefd)) {
+	if (-1 == pipe(pipefd))
+	{
 		fprintf(stderr, "Create pipe fail, %s\n", strerror(errno));
 		exit(errno);
 	}
@@ -62,7 +64,8 @@ int main(int argc, char **argv)
 	 */
 	
 	// Execute the first program.
-	if (0 == (pid1 = fork())) {
+	if (0 == (pid1 = fork()))
+	{
 		// The first program use stdandard input as its input.
 		// Close the read end of pipe so that it won't suspend forever.
 	    	if (-1 == close(pipefd[0])) {
@@ -78,7 +81,8 @@ int main(int argc, char **argv)
 	    	run(program1);
 	}
 	// Execute the second program.
-	else if (0 == (pid2 = fork())) {
+	else if (0 == (pid2 = fork()))
+	{
 		// The second program use stdandard output as its output.
 		// Close the write end of pipe so that it won't suspend forever.
 	    	if (-1 == close(pipefd[1])) {
